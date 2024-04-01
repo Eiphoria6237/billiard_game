@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bw3cjigjfgr5d"]
+
+[ext_resource type="Texture2D" uid="uid://b07hpml08cap6" path="res://scenes/cue/cue.png" id="1_hq0ov"]
+[ext_resource type="Script" path="res://scenes/cue/cue.gd" id="2_mpb67"]
+
+[node name="cue" type="Sprite2D"]
+position = Vector2(0, 1)
+rotation = 3.1414
+scale = Vector2(2.6496, 4.37854)
+texture = ExtResource("1_hq0ov")
+script = ExtResource("2_mpb67")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = 27.0
+offset_top = -8.0
+offset_right = 64.0
+offset_bottom = -4.0
+max_value = 1.0
+fill_mode = 1
+show_percentage = false
