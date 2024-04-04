@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8no4njpyp448"
-path="res://.godot/imported/cue_ball.png-1b90a5cbb72e16f2f8d0755291b365ea.ctex"
+uid="uid://0mw7lq07fwaq"
+path="res://.godot/imported/neutral_ball.png-f255ce8e944c08ab682237113cebcc73.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/cue_ball/cue_ball.png"
-dest_files=["res://.godot/imported/cue_ball.png-1b90a5cbb72e16f2f8d0755291b365ea.ctex"]
+source_file="res://assets/ball_state/neutral_ball.png"
+dest_files=["res://.godot/imported/neutral_ball.png-f255ce8e944c08ab682237113cebcc73.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://g6jysxvv7h4v"
-path="res://.godot/imported/ball_blue_large.png-f293316fea96c76dcb75a35a0f9c531d.ctex"
+uid="uid://b4ghspy14b5m6"
+path="res://.godot/imported/ice_ball.png-f509b0dfd8c88ee8281d1d239f5cc18c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pngs/ball_blue_large.png"
-dest_files=["res://.godot/imported/ball_blue_large.png-f293316fea96c76dcb75a35a0f9c531d.ctex"]
+source_file="res://assets/ball_state/ice_ball.png"
+dest_files=["res://.godot/imported/ice_ball.png-f509b0dfd8c88ee8281d1d239f5cc18c.ctex"]
 
 [params]
 

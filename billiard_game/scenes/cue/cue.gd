@@ -23,14 +23,14 @@ func _process(delta):
 				if power >= get_parent().MAX_POWER:
 					power = get_parent().MAX_POWER
 					increasing = false
-			else:
-				power -= 0.1 * SPEED_MODIFIER
-				if power <= 0:
-					power = 0
-					increasing = true
-				# Update the progress bar value
-			power_bar.value = power / (get_parent().MAX_POWER)
-			print(power)
+		else:
+			increasing = true
+			power -= 0.1 * SPEED_MODIFIER
+			if power <= 0:
+				power = 0
+		# Update the progress bar value
+		power_bar.value = power / (get_parent().MAX_POWER)
+		#print(power)
 	else:
 		if power > 0:
 			var direction = position - mouse_pos

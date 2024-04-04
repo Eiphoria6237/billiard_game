@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5k52sqn1tvcg"
-path="res://.godot/imported/ball_red_small.png-5afcfc2e0b68e4dc12ff737bf95ab5e0.ctex"
+uid="uid://vlpjcdd4gk2n"
+path="res://.godot/imported/tree.png-68257202de628780557d8a98659a293a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pngs/ball_red_small.png"
-dest_files=["res://.godot/imported/ball_red_small.png-5afcfc2e0b68e4dc12ff737bf95ab5e0.ctex"]
+source_file="res://assets/terrain/tree.png"
+dest_files=["res://.godot/imported/tree.png-68257202de628780557d8a98659a293a.ctex"]
 
 [params]
 

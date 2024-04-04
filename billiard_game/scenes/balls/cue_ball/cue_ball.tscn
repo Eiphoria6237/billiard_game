@@ -1,12 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://cj14ke18d38xu"]
 
-[ext_resource type="Script" path="res://scenes/cue_ball/cue_ball.gd" id="1_4c8kr"]
-[ext_resource type="Texture2D" uid="uid://8no4njpyp448" path="res://scenes/cue_ball/cue_ball.png" id="1_tauld"]
+[ext_resource type="Script" path="res://scenes/balls/cue_ball/cue_ball.gd" id="1_4c8kr"]
+[ext_resource type="Texture2D" uid="uid://8no4njpyp448" path="res://scenes/balls/cue_ball/cue_ball.png" id="1_tauld"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fn7lk"]
 radius = 28.0179
 
 [node name="CueBall" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 61
 script = ExtResource("1_4c8kr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
