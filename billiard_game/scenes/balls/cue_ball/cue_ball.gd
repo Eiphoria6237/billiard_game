@@ -7,10 +7,6 @@ signal one_shot_finished
 var DEBUG: bool = false
 var max_speed: float = 0.0	
 
-func _ready():
-	super._ready()
-	print(contact_monitor)
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if DEBUG: max_speed = max(max_speed, linear_velocity.length_squared())

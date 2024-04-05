@@ -1,6 +1,6 @@
 extends Node
 
-const MAX_POWER = 40.0
+const MAX_POWER = 5000
 const DAMP = 4.0
 
 @export var ball_scene: PackedScene = preload("res://scenes/balls/neutral_ball/neutral_ball.tscn")
@@ -14,19 +14,16 @@ func _ready():
 
 func _process(delta):
 	# Check if the cue ball has stopped and there is no cue instance currently
-	if cue_ball.is_stopped_or_still():
-		if not is_instance_valid(cue_instance):
-			show_cue()
+	if cue_ball.is_stopped_or_still(): 
+		show_cue()
 
 func new_game():
+	generate_cue()
 	generate_balls()
 
 func show_cue():
-	if not is_instance_valid(cue_instance):
-		cue_instance = cue_scene.instantiate()
-		add_child(cue_instance)
-		cue_instance.position = cue_ball.position
-		cue_instance.connect("shoot", Callable(self, "_on_cue_shoot"))
+	cue_instance.position = cue_ball.position
+	cue_instance.visible = true
 
 func generate_balls():
 	for i in range(3,7):
@@ -37,20 +34,24 @@ func generate_balls():
 		new_ball.position = pos
 		objectballs.append(new_ball)
 
+func generate_cue():
+	cue_instance = cue_scene.instantiate()
+	add_child(cue_instance)
+	cue_instance.position = cue_ball.position
+	cue_instance.connect("shoot", Callable(self, "_on_cue_shoot"))
+
 func _on_cue_shoot(power):
 	cue_ball.apply_central_impulse(power)
 	cue_ball.linear_damp = DAMP
 	cue_ball.shot = true
 	# Hide cue after shooting
-	await get_tree().create_timer(1.0).timeout
-	if is_instance_valid(cue_instance):
-		cue_instance.queue_free()
-		cue_instance = null
+	await get_tree().create_timer(0.5).timeout
+	cue_instance.visible = false
 
 
 func _on_cue_ball_one_shot_finished():
 	# neutral balls are affected by the surrouding fire/ice balls
-	const region = Vector2(50, 50)
+	const region = Vector2(100, 100)
 	
 	var alive_objectballs = []
 	for objectball in objectballs:
@@ -75,10 +76,22 @@ func _on_cue_ball_one_shot_finished():
 			assert(infection != null)
 			# cannot change now: avoid transmitting
 			ballIdx2changeState[i] = infection.state
+		else:
+			ballIdx2changeState[i] = target.BallState.NEUTRAL# weird use of BallState qwq
 	
 	# change state
 	for idx in ballIdx2changeState.keys():
-		alive_objectballs[idx].set_ball_state(ballIdx2changeState.get(idx))
+		var target = alive_objectballs[idx]
+		var next_state = ballIdx2changeState.get(idx)	# ice or fire or neutral
+		if next_state == target.BallState.NEUTRAL:
+			target.prev_near = next_state
+		else:
+			if target.prev_near == next_state:
+				# near ice/fire ball at the beginning and ending of one shot, set on ice/fire
+				target.set_ball_state(next_state)
+				target.set_default_prev_near()	# set default neutral state
+			else:
+				target.prev_near = next_state
 			
 
 

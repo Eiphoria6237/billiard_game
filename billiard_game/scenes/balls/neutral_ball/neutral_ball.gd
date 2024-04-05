@@ -18,6 +18,7 @@ var ball_texture = {
 }
 
 var state = BallState.NEUTRAL
+var prev_near = BallState.NEUTRAL	# detect ball infection
 
 func _ready():
 	super._ready()
@@ -32,6 +33,9 @@ func _process(delta):
 func set_ball_state(new_state):
 	state = new_state
 	$State.texture = ball_texture[state]
+
+func set_default_prev_near():
+	prev_near = BallState.NEUTRAL
 
 func is_on_fire():
 	return state == BallState.FIRE

@@ -2,7 +2,7 @@ extends Sprite2D
 
 signal shoot
 
-const SPEED_MODIFIER: float = 15
+const SPEED_MODIFIER: float = 100
 
 @onready var power_bar = get_node("ProgressBar")
 var power: float = 0.0
@@ -19,13 +19,13 @@ func _process(delta):
 		# check if space key is pressed
 		if Input.is_key_pressed(KEY_SPACE):
 			if increasing:
-				power += 0.1 * SPEED_MODIFIER
+				power += SPEED_MODIFIER
 				if power >= get_parent().MAX_POWER:
 					power = get_parent().MAX_POWER
 					increasing = false
 		else:
 			increasing = true
-			power -= 0.1 * SPEED_MODIFIER
+			power -= 0.5 * SPEED_MODIFIER
 			if power <= 0:
 				power = 0
 		# Update the progress bar value
@@ -33,7 +33,7 @@ func _process(delta):
 		#print(power)
 	else:
 		if power > 0:
-			var direction = position - mouse_pos
+			var direction = (position - mouse_pos).normalized()
 			shoot.emit(power * direction)
 			# reset for next time
 			power = 0
