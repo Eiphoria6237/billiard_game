@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="2DBilliardGame"
-run/main_scene="res://scenes/main/main.tscn"
+run/main_scene="res://scenes/levels/main/level_select.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
 CueBallData="*res://scenes/balls/cue_ball/cue_ball_data.gd"
+Global="*res://scenes/main/global.gd"
 
 [display]
 

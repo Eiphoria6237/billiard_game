@@ -80,7 +80,6 @@ func aiming(_delta):
 	var result = space_state.intersect_ray(intersect_ray_params)
 	# Should always have some result
 	if result:
-		print(result.collider, result.position)
 		var local_target_position = to_local(result.position)
 		resultPos = local_target_position
 		canDraw = true

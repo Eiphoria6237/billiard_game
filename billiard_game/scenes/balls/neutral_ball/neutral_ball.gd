@@ -10,6 +10,8 @@ enum BallState {
 var neutral_ball = preload("res://assets/ball_state/neutral_ball.png")
 var fire_ball = preload("res://assets/ball_state/fire_ball_big.png")
 var ice_ball = preload("res://assets/ball_state/ice_ball_big.png")
+@export var explode_scene: PackedScene = preload("res://scenes/balls/neutral_ball/Explosion.tscn")
+@export var smash_scene: PackedScene = preload("res://scenes/balls/neutral_ball/Smash.tscn")
 
 var ball_texture = {
 	BallState.NEUTRAL: neutral_ball,
@@ -45,6 +47,7 @@ func is_on_ice():
 
 func _on_body_entered(body):
 	if body is Area2D:
+		print("is area2d")
 		#region Enter water area
 		# 1. water state:
 		# 1.1. fireball eliminated
@@ -62,32 +65,30 @@ func _on_body_entered(body):
 			linear_damp = ice_damping
 			if $".".is_on_fire():
 				$".".set_ball_state(BallState.NEUTRAL)
-	if body is RigidBody2D and super.is_high_speed(body.linear_velocity):
+	if body is RigidBody2D:
 		#region Balls collision circumstances (need high speed)
 		# 1. by cue_ball: neutral -> fire
 		# 2. by other ball:
 		# 2.1.	neutral enters neutral -> fire both
 		# 2.2.	fire/ice enters fire/ice -> both smash
-		# 2.3.	neutral enters fire/ice ->
-		# 			fire/ice smash, neutral...
-		# 2.4.	fire/ice enters neutral ->  fire/ice smash, neutral get a lower acceleration
-		#endregion
-		if body.is_cue_ball():
-			if state == BallState.NEUTRAL: set_ball_state(BallState.FIRE)
-		else:
+		print("is rigidbody")
+		print(body.is_cue_ball(), "", body.is_high_speed(body.linear_velocity))
+		if body.is_cue_ball() and body.is_high_speed(body.linear_velocity):
+			if state == BallState.NEUTRAL: 
+				print("fire")
+				set_ball_state(BallState.FIRE)
+			if state == BallState.ICE: smash()
+		if not body.is_cue_ball():
 			if body.is_neutral() and super.is_neutral():
 				body.set_ball_state(BallState.FIRE)
 				$".".set_ball_state(BallState.FIRE)
-			elif not (body.is_neutral() and super.is_neutral()):
-				body.queue_free()
-				$".".queue_free()
-			elif body.is_neutral():
-				$".".queue_free()
-				# [FIXME]: neutral ball's behavior
-			elif $".".is_neutral():
-				# [TODO] 2.4.
-				pass
-	elif body is StaticBody2D:
+			elif body.is_on_fire() and super.is_on_fire():
+				explode()
+			elif body.is_on_ice() and super.is_on_ice():
+				smash()
+
+	if body is StaticBody2D:
+		print("is staticbody")
 		if body.collision_layer == 8: # tree
 			if state == BallState.FIRE:
 				set_ball_state(BallState.NEUTRAL)
@@ -95,3 +96,15 @@ func _on_body_entered(body):
 				set_ball_state(BallState.ICE)
 		elif body.collision_layer == 32: # mud
 			pass
+
+func explode():
+	var explosion = explode_scene.instantiate()
+	explosion.set_position(self.get_position())
+	get_parent().add_child(explosion)
+	queue_free()
+
+func smash():
+	var smash = smash_scene.instantiate()
+	smash.set_position(self.get_position())
+	get_parent().add_child(smash)
+	queue_free()

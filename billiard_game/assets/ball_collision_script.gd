@@ -5,7 +5,7 @@ const initial_damping = 1.0
 const collision_damping = 2.0
 const ice_damping = 0.5
 var has_collided = false
-const speed_threshold: float = 10000000
+const speed_threshold: float = 2000
 
 func _ready():
 	linear_damp = initial_damping
@@ -35,4 +35,5 @@ func is_cue_ball():
 
 func is_high_speed(o_lv: Vector2):
 	# try using relative velocity
-	return linear_velocity.distance_squared_to(o_lv) >= speed_threshold
+	print(o_lv.length(), " : ",speed_threshold)
+	return o_lv.length() >= speed_threshold

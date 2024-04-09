@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cuxqsao1nsebg"]
+
+[ext_resource type="Script" path="res://scenes/levels/main/level_button.gd" id="1_q8x24"]
+
+[node name="LevelButton" type="Button"]
+custom_minimum_size = Vector2(200, 150)
+pivot_offset = Vector2(100, 75)
+text = "Level 1"
+script = ExtResource("1_q8x24")
+
+[connection signal="mouse_entered" from="." to="." method="_on_lvl_btn_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_lvl_btn_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_lvl_btn_pressed"]

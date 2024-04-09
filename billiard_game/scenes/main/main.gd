@@ -6,20 +6,28 @@ const DAMP = 4.0
 @export var ball_scene: PackedScene = preload("res://scenes/balls/neutral_ball/neutral_ball.tscn")
 @export var cue_scene: PackedScene = preload("res://scenes/cue/cue.tscn")
 @onready var cue_ball = $CueBall
+@onready var ball_parent = $Balls
 var cue_instance: Node = null
-var objectballs = []
+var objectballs: Array
+var alive_objectballs: Array
 
 func _ready():
 	new_game()
+	alive_objectballs.append_array(objectballs)
 
 func _process(delta):
 	# Check if the cue ball has stopped and there is no cue instance currently
 	if cue_ball.is_stopped_or_still():
+		update_alive_balls()
+		if alive_objectballs.is_empty():
+			Global.next_level()
 		enable_cue()
 
 func new_game():
 	generate_cue()
-	generate_balls()
+	objectballs.append_array(ball_parent.get_children(false))
+	print(objectballs)
+	#generate_balls()
 
 func enable_cue():
 	cue_instance.process_mode = 0 # = Mode: Inherit
@@ -58,12 +66,8 @@ func _on_cue_shoot(power):
 func _on_cue_ball_one_shot_finished():
 	# neutral balls are affected by the surrouding fire/ice balls
 	const region = Vector2(100, 100)
-
-	var alive_objectballs = []
-	for objectball in objectballs:
-		if is_instance_valid(objectball):
-			alive_objectballs.append(objectball)
-
+	update_alive_balls()
+	
 	var ballIdx2changeState = {}
 	for i in range(alive_objectballs.size()):
 		var target = alive_objectballs[i]
@@ -125,3 +129,10 @@ func _on_water_body_entered(body):
 func _on_water_body_exited(body):
 	body.linear_damp = body.initial_damping
 	pass # Replace with function body.
+
+func update_alive_balls():
+	alive_objectballs = []
+	for objectball in objectballs:
+		print(objectball)
+		if objectball !=null:
+			alive_objectballs.append(objectball)
