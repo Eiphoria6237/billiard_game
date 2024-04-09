@@ -5,7 +5,7 @@
 
 [node name="cue" type="Sprite2D"]
 position = Vector2(0, 1)
-rotation = 3.1414
+rotation = 3.14159
 scale = Vector2(2.6496, 4.37854)
 texture = ExtResource("1_hq0ov")
 script = ExtResource("2_mpb67")

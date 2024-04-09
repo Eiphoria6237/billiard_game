@@ -20,19 +20,19 @@ func _on_body_entered(body):
 
 func is_stopped_or_still():
 	return linear_velocity.distance_squared_to(Vector2.ZERO) <= 10
-	
+
 func is_on_fire():
 	return false
-	
+
 func is_on_ice():
 	return false
-	
+
 func is_neutral():
 	return not (is_on_fire() or is_on_ice())
 
 func is_cue_ball():
 	return false
-	
+
 func is_high_speed(o_lv: Vector2):
 	# try using relative velocity
 	return linear_velocity.distance_squared_to(o_lv) >= speed_threshold

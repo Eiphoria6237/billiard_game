@@ -14,16 +14,21 @@ func _ready():
 
 func _process(delta):
 	# Check if the cue ball has stopped and there is no cue instance currently
-	if cue_ball.is_stopped_or_still(): 
-		show_cue()
+	if cue_ball.is_stopped_or_still():
+		enable_cue()
 
 func new_game():
 	generate_cue()
 	generate_balls()
 
-func show_cue():
+func enable_cue():
+	cue_instance.process_mode = 0 # = Mode: Inherit
 	cue_instance.position = cue_ball.position
 	cue_instance.visible = true
+
+func disable_cue():
+	cue_instance.process_mode =4 # = Mode: Disabled
+	cue_instance.visible = false
 
 func generate_balls():
 	for i in range(3,7):
@@ -41,29 +46,30 @@ func generate_cue():
 	cue_instance.connect("shoot", Callable(self, "_on_cue_shoot"))
 
 func _on_cue_shoot(power):
+	disable_cue()
 	cue_ball.apply_central_impulse(power)
 	cue_ball.linear_damp = DAMP
 	cue_ball.shot = true
 	# Hide cue after shooting
 	await get_tree().create_timer(0.5).timeout
-	cue_instance.visible = false
+
 
 
 func _on_cue_ball_one_shot_finished():
 	# neutral balls are affected by the surrouding fire/ice balls
 	const region = Vector2(100, 100)
-	
+
 	var alive_objectballs = []
 	for objectball in objectballs:
 		if is_instance_valid(objectball):
 			alive_objectballs.append(objectball)
-	
+
 	var ballIdx2changeState = {}
 	for i in range(alive_objectballs.size()):
 		var target = alive_objectballs[i]
 		if not target.is_neutral():	continue
 		var min_dis: float = INF
-		
+
 		var infection = null
 		for j in range(alive_objectballs.size()):
 			var tmp = alive_objectballs[j]
@@ -78,7 +84,7 @@ func _on_cue_ball_one_shot_finished():
 			ballIdx2changeState[i] = infection.state
 		else:
 			ballIdx2changeState[i] = target.BallState.NEUTRAL# weird use of BallState qwq
-	
+
 	# change state
 	for idx in ballIdx2changeState.keys():
 		var target = alive_objectballs[idx]
@@ -92,7 +98,7 @@ func _on_cue_ball_one_shot_finished():
 				target.set_default_prev_near()	# set default neutral state
 			else:
 				target.prev_near = next_state
-			
+
 
 
 func _on_water_body_entered(body):

@@ -39,7 +39,7 @@ func set_default_prev_near():
 
 func is_on_fire():
 	return state == BallState.FIRE
-	
+
 func is_on_ice():
 	return state == BallState.ICE
 
@@ -68,10 +68,10 @@ func _on_body_entered(body):
 		# 2. by other ball:
 		# 2.1.	neutral enters neutral -> fire both
 		# 2.2.	fire/ice enters fire/ice -> both smash
-		# 2.3.	neutral enters fire/ice -> 
+		# 2.3.	neutral enters fire/ice ->
 		# 			fire/ice smash, neutral...
 		# 2.4.	fire/ice enters neutral ->  fire/ice smash, neutral get a lower acceleration
-		#endregion 
+		#endregion
 		if body.is_cue_ball():
 			if state == BallState.NEUTRAL: set_ball_state(BallState.FIRE)
 		else:

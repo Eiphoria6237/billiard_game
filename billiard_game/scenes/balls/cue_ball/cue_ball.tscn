@@ -7,6 +7,7 @@
 radius = 28.0179
 
 [node name="CueBall" type="RigidBody2D"]
+z_index = 1
 collision_layer = 2
 collision_mask = 61
 script = ExtResource("1_4c8kr")
