@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://cro46ekkcj16f" path="res://assets/terrain/water.png" id="1_vn8rd"]
 
 [node name="Water" type="Area2D"]
-scale = Vector2(0.5, 0.5)
 collision_layer = 16
 collision_mask = 6
+priority = 3
 script = ExtResource("1_fgeg7")
 
 [node name="State" type="Sprite2D" parent="."]

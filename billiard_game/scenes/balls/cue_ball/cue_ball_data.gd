@@ -15,8 +15,4 @@ var cue_ball_position
 func set_cue_ball_state(state: CueBallData.CueBallStates):
 	CueBallData.cue_ball_state = state
 	if state == CueBallData.CueBallStates.AIMING:
-		print("AIMING")
 		isAiming.emit()
-
-	elif state == CueBallData.CueBallStates.MOVING:
-		print("MOVING")

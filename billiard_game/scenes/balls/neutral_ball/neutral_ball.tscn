@@ -18,6 +18,7 @@ can_sleep = false
 script = ExtResource("1_etoib")
 
 [node name="State" type="Sprite2D" parent="."]
+z_index = 1
 texture = ExtResource("2_33w46")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

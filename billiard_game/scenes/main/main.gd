@@ -7,6 +7,7 @@ const DAMP = 4.0
 @export var cue_scene: PackedScene = preload("res://scenes/cue/cue.tscn")
 @onready var cue_ball = $CueBall
 @onready var ball_parent = $Balls
+@onready var GUI = $CanvasLayer
 var cue_instance: Node = null
 var objectballs: Array
 var alive_objectballs: Array
@@ -26,7 +27,6 @@ func _process(delta):
 func new_game():
 	generate_cue()
 	objectballs.append_array(ball_parent.get_children(false))
-	print(objectballs)
 	#generate_balls()
 
 func enable_cue():
@@ -67,7 +67,7 @@ func _on_cue_ball_one_shot_finished():
 	# neutral balls are affected by the surrouding fire/ice balls
 	const region = Vector2(100, 100)
 	update_alive_balls()
-	
+
 	var ballIdx2changeState = {}
 	for i in range(alive_objectballs.size()):
 		var target = alive_objectballs[i]
@@ -133,6 +133,5 @@ func _on_water_body_exited(body):
 func update_alive_balls():
 	alive_objectballs = []
 	for objectball in objectballs:
-		print(objectball)
 		if objectball !=null:
 			alive_objectballs.append(objectball)

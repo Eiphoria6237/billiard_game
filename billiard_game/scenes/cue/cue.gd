@@ -56,6 +56,7 @@ func _process(delta):
 		if power > 0:
 			var direction = (position - mouse_pos).normalized()
 			shoot.emit(power * direction)
+			Global.attempts+=1
 			# reset for next time
 			power = 0
 			power_bar.value = 0

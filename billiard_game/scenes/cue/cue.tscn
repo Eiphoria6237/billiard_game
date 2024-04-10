@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://scenes/cue/cue.gd" id="2_mpb67"]
 
 [node name="cue" type="Sprite2D"]
+z_index = 1
 position = Vector2(0, 1)
 rotation = 3.14159
 scale = Vector2(2.6496, 4.37854)

@@ -35,5 +35,5 @@ func is_cue_ball():
 
 func is_high_speed(o_lv: Vector2):
 	# try using relative velocity
-	print(o_lv.length(), " : ",speed_threshold)
+	#print(o_lv.length(), " : ",speed_threshold)
 	return o_lv.length() >= speed_threshold

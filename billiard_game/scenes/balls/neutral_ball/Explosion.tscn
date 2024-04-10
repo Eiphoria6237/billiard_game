@@ -56,6 +56,7 @@ _data = {
 [node name="Explosion" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
 texture = ExtResource("1_vdni8")
 hframes = 8
 vframes = 8

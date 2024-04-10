@@ -12,6 +12,7 @@ var fire_ball = preload("res://assets/ball_state/fire_ball_big.png")
 var ice_ball = preload("res://assets/ball_state/ice_ball_big.png")
 @export var explode_scene: PackedScene = preload("res://scenes/balls/neutral_ball/Explosion.tscn")
 @export var smash_scene: PackedScene = preload("res://scenes/balls/neutral_ball/Smash.tscn")
+@export var score_reward: int = 5
 
 var ball_texture = {
 	BallState.NEUTRAL: neutral_ball,
@@ -47,7 +48,6 @@ func is_on_ice():
 
 func _on_body_entered(body):
 	if body is Area2D:
-		print("is area2d")
 		#region Enter water area
 		# 1. water state:
 		# 1.1. fireball eliminated
@@ -71,24 +71,20 @@ func _on_body_entered(body):
 		# 2. by other ball:
 		# 2.1.	neutral enters neutral -> fire both
 		# 2.2.	fire/ice enters fire/ice -> both smash
-		print("is rigidbody")
-		print(body.is_cue_ball(), "", body.is_high_speed(body.linear_velocity))
 		if body.is_cue_ball() and body.is_high_speed(body.linear_velocity):
-			if state == BallState.NEUTRAL: 
-				print("fire")
+			if state == BallState.NEUTRAL:
 				set_ball_state(BallState.FIRE)
 			if state == BallState.ICE: smash()
 		if not body.is_cue_ball():
-			if body.is_neutral() and super.is_neutral():
+			if body.is_neutral() and is_neutral() and body.is_high_speed(body.linear_velocity):
 				body.set_ball_state(BallState.FIRE)
 				$".".set_ball_state(BallState.FIRE)
-			elif body.is_on_fire() and super.is_on_fire():
+			elif body.is_on_fire() and is_on_fire():
 				explode()
-			elif body.is_on_ice() and super.is_on_ice():
+			elif body.is_on_ice() and is_on_ice():
 				smash()
 
 	if body is StaticBody2D:
-		print("is staticbody")
 		if body.collision_layer == 8: # tree
 			if state == BallState.FIRE:
 				set_ball_state(BallState.NEUTRAL)
@@ -101,10 +97,12 @@ func explode():
 	var explosion = explode_scene.instantiate()
 	explosion.set_position(self.get_position())
 	get_parent().add_child(explosion)
+	Global.score+=score_reward
 	queue_free()
 
 func smash():
 	var smash = smash_scene.instantiate()
 	smash.set_position(self.get_position())
 	get_parent().add_child(smash)
+	Global.score+=score_reward
 	queue_free()
