@@ -1,13 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://brhkpujcjuwmx"]
+[gd_scene load_steps=2 format=3 uid="uid://bbhus1vifu248"]
 
-[ext_resource type="PackedScene" uid="uid://c26l1w8wv5kbo" path="res://scenes/main/level_template.tscn" id="1_ga3nm"]
-[ext_resource type="PackedScene" uid="uid://coikgqnkwtbw3" path="res://scenes/terrain/tree/christmas_tree.tscn" id="4_kvsqt"]
-[ext_resource type="PackedScene" uid="uid://48pjycotvitf" path="res://scenes/balls/neutral_ball/neutral_ball.tscn" id="5_7cq6g"]
+[ext_resource type="PackedScene" uid="uid://c26l1w8wv5kbo" path="res://scenes/main/level_template.tscn" id="1_4cl66"]
 
-[node name="Main" instance=ExtResource("1_ga3nm")]
+[node name="Main" instance=ExtResource("1_4cl66")]
 
-[node name="NeutralBall" parent="Balls" index="0" instance=ExtResource("5_7cq6g")]
-position = Vector2(660, 376)
+[node name="LevelName" parent="CanvasLayer/HUD/Stats" index="2"]
+text = "Level 1"
 
-[node name="Christmas_tree" parent="." index="4" instance=ExtResource("4_kvsqt")]
-position = Vector2(387, 226)
+[node name="LevelNoticeLabel" parent="CanvasLayer/LevelNoticeContainer/MarginContainer/VBoxContainer" index="0"]
+text = "1. 按住鼠标开启辅助线
+2. 长按空格蓄力发射球
+3. 大力撞击球会使球着火
+4. 试试让两个着火的球相撞看看会发生什么吧！"

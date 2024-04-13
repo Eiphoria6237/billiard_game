@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cflvljtsx78nq"]
+
+[ext_resource type="PackedScene" uid="uid://c26l1w8wv5kbo" path="res://scenes/main/level_template.tscn" id="1_0dm8t"]
+[ext_resource type="PackedScene" uid="uid://1p3p2ayf1422" path="res://scenes/terrain/water/water.tscn" id="3_l5c8m"]
+
+[node name="Main" instance=ExtResource("1_0dm8t")]
+nuetral_ball_count = 4
+
+[node name="Water" parent="." index="4" instance=ExtResource("3_l5c8m")]
+position = Vector2(356, 515)
+
+[node name="LevelName" parent="CanvasLayer/HUD/Stats" index="2"]
+text = "Level 5"

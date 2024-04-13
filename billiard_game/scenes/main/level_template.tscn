@@ -1,10 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://c26l1w8wv5kbo"]
+[gd_scene load_steps=15 format=3 uid="uid://c26l1w8wv5kbo"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_y8ua2"]
 [ext_resource type="TileSet" uid="uid://b4h3428f1j6v7" path="res://resources/tile_set.tres" id="2_7plk3"]
 [ext_resource type="Texture2D" uid="uid://cplq8lh3qux2w" path="res://assets/edited_Hamburger_icon.svg" id="4_0av4f"]
 [ext_resource type="Script" path="res://scenes/main/in_game_menu.gd" id="4_3df1g"]
 [ext_resource type="PackedScene" uid="uid://cj14ke18d38xu" path="res://scenes/balls/cue_ball/cue_ball.tscn" id="4_4pqci"]
+[ext_resource type="Theme" uid="uid://dlvtsfrms6587" path="res://resources/default_theme.tres" id="5_6l0hf"]
+[ext_resource type="Texture2D" uid="uid://djj2hauphwl37" path="res://assets/pngs/back.png" id="7_qvy35"]
+[ext_resource type="Texture2D" uid="uid://b5yiwh1ucyfnl" path="res://assets/pngs/check.png" id="8_bsfyc"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gla7m"]
 bounce = 0.5
@@ -19,6 +22,11 @@ size = Vector2(464.5, 789.5)
 bounce = 1.0
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_sojs3"]
+color = Color(1, 1, 1, 1)
+thickness = 2
+vertical = true
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_h25t1"]
 color = Color(1, 1, 1, 1)
 thickness = 2
 vertical = true
@@ -66,60 +74,70 @@ zoom = Vector2(0.7, 0.7)
 process_mode = 3
 script = ExtResource("4_3df1g")
 
-[node name="Popup" type="MarginContainer" parent="CanvasLayer"]
-anchors_preset = 13
-anchor_left = 0.5
-anchor_right = 0.5
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -80.0
-offset_right = 80.0
+offset_bottom = 56.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("5_6l0hf")
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Popup"]
+[node name="Popup" type="MarginContainer" parent="CanvasLayer/CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 200)
+layout_mode = 2
+theme_override_constants/margin_top = 250
+theme_override_constants/margin_bottom = 300
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/CenterContainer/Popup"]
 modulate = Color(1, 1, 1, 0.482353)
 layout_mode = 2
-color = Color(0.109804, 0.109804, 0.109804, 1)
+color = Color(0.321569, 0.321569, 0.321569, 1)
 
-[node name="PopupElements" type="VBoxContainer" parent="CanvasLayer/Popup"]
+[node name="LabelMargin" type="MarginContainer" parent="CanvasLayer/CenterContainer/Popup"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PopupElements" type="VBoxContainer" parent="CanvasLayer/CenterContainer/Popup/LabelMargin"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="LabelMargin" type="MarginContainer" parent="CanvasLayer/Popup/PopupElements"]
-layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-
-[node name="LabelVBox" type="VBoxContainer" parent="CanvasLayer/Popup/PopupElements/LabelMargin"]
+[node name="LabelVBox" type="VBoxContainer" parent="CanvasLayer/CenterContainer/Popup/LabelMargin/PopupElements"]
 layout_mode = 2
 
-[node name="Text" type="Label" parent="CanvasLayer/Popup/PopupElements/LabelMargin/LabelVBox"]
+[node name="Text" type="Label" parent="CanvasLayer/CenterContainer/Popup/LabelMargin/PopupElements/LabelVBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 52
 text = "Pause"
 horizontal_alignment = 1
 
-[node name="Subtext" type="Label" parent="CanvasLayer/Popup/PopupElements/LabelMargin/LabelVBox"]
+[node name="Subtext" type="Label" parent="CanvasLayer/CenterContainer/Popup/LabelMargin/PopupElements/LabelVBox"]
 layout_mode = 2
 text = "subText"
 horizontal_alignment = 1
 
-[node name="MenuButtons" type="VBoxContainer" parent="CanvasLayer/Popup/PopupElements"]
+[node name="MenuButtons" type="VBoxContainer" parent="CanvasLayer/CenterContainer/Popup/LabelMargin/PopupElements"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="ContinueBtn" type="Button" parent="CanvasLayer/Popup/PopupElements/MenuButtons"]
+[node name="ContinueBtn" type="Button" parent="CanvasLayer/CenterContainer/Popup/LabelMargin/PopupElements/MenuButtons"]
 layout_mode = 2
 text = "Continue"
 
-[node name="RestartBtn" type="Button" parent="CanvasLayer/Popup/PopupElements/MenuButtons"]
+[node name="RestartBtn" type="Button" parent="CanvasLayer/CenterContainer/Popup/LabelMargin/PopupElements/MenuButtons"]
 layout_mode = 2
 text = "Restart"
 
-[node name="BackToMenuBtn" type="Button" parent="CanvasLayer/Popup/PopupElements/MenuButtons"]
+[node name="BackToMenuBtn" type="Button" parent="CanvasLayer/CenterContainer/Popup/LabelMargin/PopupElements/MenuButtons"]
 layout_mode = 2
-text = "BackToMenu"
+text = "Back To Levels"
 
 [node name="HUD" type="MarginContainer" parent="CanvasLayer"]
 offset_right = 356.0
@@ -138,6 +156,14 @@ icon_alignment = 1
 layout_mode = 2
 theme_override_constants/separation = 10
 theme_override_styles/separator = SubResource("StyleBoxLine_sojs3")
+
+[node name="LevelName" type="Label" parent="CanvasLayer/HUD/Stats"]
+layout_mode = 2
+
+[node name="VSeparator3" type="VSeparator" parent="CanvasLayer/HUD/Stats"]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxLine_h25t1")
 
 [node name="Attempts" type="Label" parent="CanvasLayer/HUD/Stats"]
 layout_mode = 2
@@ -160,8 +186,94 @@ text = "Score:"
 layout_mode = 2
 text = "0"
 
+[node name="LevelNoticeContainer" type="PanelContainer" parent="CanvasLayer"]
+offset_left = 61.0
+offset_top = 56.0
+offset_right = 329.0
+offset_bottom = 176.0
+theme = ExtResource("5_6l0hf")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/LevelNoticeContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/LevelNoticeContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LevelNoticeLabel" type="Label" parent="CanvasLayer/LevelNoticeContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Level Notice"
+
+[node name="SureButton" type="Button" parent="CanvasLayer/LevelNoticeContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "我知道了"
+
+[node name="LevelPassContainer" type="CenterContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/LevelPassContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/LevelPassContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/LevelPassContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CanvasLayer/LevelPassContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Nice! 
+You have pssed this level!"
+horizontal_alignment = 1
+
+[node name="StarLabel" type="RichTextLabel" parent="CanvasLayer/LevelPassContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+text = "[center][img=64x64]res://assets/pngs/star.png[/img][img=64x64]res://assets/pngs/star.png[/img][img=64x64]res://assets/pngs/star.png[/img][/center]"
+fit_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/LevelPassContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="BackBtn" type="Button" parent="CanvasLayer/LevelPassContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+icon = ExtResource("7_qvy35")
+flat = true
+icon_alignment = 1
+
+[node name="NextLevelBtn" type="Button" parent="CanvasLayer/LevelPassContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+icon = ExtResource("8_bsfyc")
+flat = true
+icon_alignment = 1
+
+[connection signal="level_pass" from="." to="CanvasLayer" method="_on_main_level_pass"]
 [connection signal="one_shot_finished" from="CueBall" to="." method="_on_cue_ball_one_shot_finished"]
-[connection signal="pressed" from="CanvasLayer/Popup/PopupElements/MenuButtons/ContinueBtn" to="CanvasLayer" method="_on_continue_btn_pressed"]
-[connection signal="pressed" from="CanvasLayer/Popup/PopupElements/MenuButtons/RestartBtn" to="CanvasLayer" method="_on_restart_btn_pressed"]
-[connection signal="pressed" from="CanvasLayer/Popup/PopupElements/MenuButtons/BackToMenuBtn" to="CanvasLayer" method="_on_back_to_menu_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/CenterContainer/Popup/LabelMargin/PopupElements/MenuButtons/ContinueBtn" to="CanvasLayer" method="_on_continue_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/CenterContainer/Popup/LabelMargin/PopupElements/MenuButtons/RestartBtn" to="CanvasLayer" method="_on_restart_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/CenterContainer/Popup/LabelMargin/PopupElements/MenuButtons/BackToMenuBtn" to="CanvasLayer" method="_on_back_to_menu_btn_pressed"]
 [connection signal="pressed" from="CanvasLayer/HUD/Stats/MenuButton" to="CanvasLayer" method="_on_menu_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/LevelPassContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/BackBtn" to="CanvasLayer" method="_on_back_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/LevelPassContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/NextLevelBtn" to="CanvasLayer" method="_on_next_level_btn_pressed"]

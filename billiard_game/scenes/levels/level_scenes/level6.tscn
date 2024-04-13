@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcxgav13vh8ij"]
+
+[ext_resource type="PackedScene" uid="uid://c26l1w8wv5kbo" path="res://scenes/main/level_template.tscn" id="1_mvrv7"]
+[ext_resource type="PackedScene" uid="uid://clns7c5yj5pld" path="res://scenes/terrain/mud/mud.tscn" id="3_w0mfe"]
+
+[node name="Main" instance=ExtResource("1_mvrv7")]
+
+[node name="CueBall" parent="." index="1"]
+position = Vector2(846, 486)
+
+[node name="Mud" parent="." index="4" instance=ExtResource("3_w0mfe")]
+position = Vector2(220, 273)
+
+[node name="Mud2" parent="." index="5" instance=ExtResource("3_w0mfe")]
+position = Vector2(887, 167)
+
+[node name="CenterContainer" parent="CanvasLayer" index="0"]
+offset_right = 30.0
+offset_bottom = 30.0
+
+[node name="Popup" parent="CanvasLayer/CenterContainer" index="0"]
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_bottom = 200
+
+[node name="LevelName" parent="CanvasLayer/HUD/Stats" index="2"]
+text = "Level 6"
+
+[node name="LevelNoticeLabel" parent="CanvasLayer/LevelNoticeContainer/MarginContainer/VBoxContainer" index="0"]
+text = "1. 土堆会阻碍球的前进
+2. 两球相撞时的爆炸可以破坏土堆"

@@ -13,7 +13,7 @@ func _ready():
 	connect("body_entered", Callable(self, "_on_body_entered"))
 	connect("body_exited", Callable(self, "_on_body_exited"))
 
-func _on_body_entered(body):
+func _on_body_entered(_body):
 	if not has_collided:
 		linear_damp = collision_damping
 		has_collided = true

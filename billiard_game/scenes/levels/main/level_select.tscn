@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b38res2dydsqa"]
+[gd_scene load_steps=3 format=3 uid="uid://b38res2dydsqa"]
 
 [ext_resource type="Script" path="res://scenes/levels/main/level_select.gd" id="1_jiung"]
+[ext_resource type="Texture2D" uid="uid://djj2hauphwl37" path="res://assets/pngs/back.png" id="3_vnej2"]
 
 [node name="LevelSelect" type="Control"]
 layout_mode = 3
@@ -40,6 +41,7 @@ theme_override_constants/separation = 32
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 64
 text = "Select Level"
 horizontal_alignment = 1
 
@@ -48,3 +50,14 @@ layout_mode = 2
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 16
 columns = 3
+
+[node name="BackButton" type="TextureButton" parent="."]
+layout_mode = 2
+offset_left = 32.0
+offset_top = 24.0
+offset_right = 112.0
+offset_bottom = 104.0
+scale = Vector2(0.8, 0.8)
+texture_normal = ExtResource("3_vnej2")
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

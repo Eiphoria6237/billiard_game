@@ -5,6 +5,7 @@ const DAMP = 4.0
 
 @export var ball_scene: PackedScene = preload("res://scenes/balls/neutral_ball/neutral_ball.tscn")
 @export var cue_scene: PackedScene = preload("res://scenes/cue/cue.tscn")
+@export var nuetral_ball_count: int = 2
 @onready var cue_ball = $CueBall
 @onready var ball_parent = $Balls
 @onready var GUI = $CanvasLayer
@@ -12,22 +13,25 @@ var cue_instance: Node = null
 var objectballs: Array
 var alive_objectballs: Array
 
+signal level_pass(ball_count)
+
 func _ready():
 	new_game()
 	alive_objectballs.append_array(objectballs)
 
-func _process(delta):
+func _process(_delta):
 	# Check if the cue ball has stopped and there is no cue instance currently
 	if cue_ball.is_stopped_or_still():
 		update_alive_balls()
 		if alive_objectballs.is_empty():
-			Global.next_level()
+			# go next level
+			emit_signal("level_pass", nuetral_ball_count)
 		enable_cue()
 
 func new_game():
 	generate_cue()
 	objectballs.append_array(ball_parent.get_children(false))
-	#generate_balls()
+	generate_balls()
 
 func enable_cue():
 	cue_instance.process_mode = 0 # = Mode: Inherit
@@ -39,10 +43,10 @@ func disable_cue():
 	cue_instance.visible = false
 
 func generate_balls():
-	for i in range(3,7):
+	for i in range(0, nuetral_ball_count):
 		var new_ball = ball_scene.instantiate() as RigidBody2D
 		new_ball.linear_damp = DAMP
-		var pos = Vector2(randf_range(50,1200), randf_range(50,1200))
+		var pos = Vector2(randf_range(50,1200), randf_range(50,700))
 		add_child(new_ball)
 		new_ball.position = pos
 		objectballs.append(new_ball)
@@ -60,7 +64,6 @@ func _on_cue_shoot(power):
 	cue_ball.shot = true
 	# Hide cue after shooting
 	await get_tree().create_timer(0.5).timeout
-
 
 
 func _on_cue_ball_one_shot_finished():
@@ -104,34 +107,9 @@ func _on_cue_ball_one_shot_finished():
 				target.prev_near = next_state
 
 
-
-func _on_water_body_entered(body):
-	#region Enter water area
-	# 1. water state:
-	# 1.1. fireball eliminated
-	# 1.2. iceball: water -> ice
-	# 2. ice state: linear_damp = ice_damp
-	# 2.1. fireball -> neutralball
-	#endregion
-	if $Water.is_water():
-		if body.is_on_fire():
-			body.queue_free()
-		elif body.is_on_ice():
-			$Water.freeze()
-			body.linear_damp = body.ice_damping
-	else:
-		body.linear_damp = body.ice_damping
-		if body.is_on_fire():
-			body.set_ball_state(body.BallState.NEUTRAL)
-			$Water.melt()
-
-
-func _on_water_body_exited(body):
-	body.linear_damp = body.initial_damping
-	pass # Replace with function body.
-
 func update_alive_balls():
 	alive_objectballs = []
 	for objectball in objectballs:
 		if objectball !=null:
 			alive_objectballs.append(objectball)
+

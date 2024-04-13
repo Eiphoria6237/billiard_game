@@ -1,5 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://bcxgav13vh8ij"]
+[gd_scene load_steps=4 format=3 uid="uid://ciuuweablav7l"]
 
-[ext_resource type="PackedScene" uid="uid://c26l1w8wv5kbo" path="res://scenes/main/level_template.tscn" id="1_mvrv7"]
+[ext_resource type="PackedScene" uid="uid://c26l1w8wv5kbo" path="res://scenes/main/level_template.tscn" id="1_uol15"]
+[ext_resource type="PackedScene" uid="uid://1p3p2ayf1422" path="res://scenes/terrain/water/water.tscn" id="2_0h7mi"]
+[ext_resource type="PackedScene" uid="uid://coikgqnkwtbw3" path="res://scenes/terrain/tree/christmas_tree.tscn" id="3_0sipk"]
 
-[node name="Main" instance=ExtResource("1_mvrv7")]
+[node name="Main" instance=ExtResource("1_uol15")]
+nuetral_ball_count = 4
+
+[node name="Christmas_tree" parent="." index="4" instance=ExtResource("3_0sipk")]
+position = Vector2(786, 148)
+scale = Vector2(1, 1)
+
+[node name="Water" parent="." index="5" instance=ExtResource("2_0h7mi")]
+position = Vector2(435, 388)
+scale = Vector2(2, 2)
+
+[node name="LevelName" parent="CanvasLayer/HUD/Stats" index="2"]
+text = "Level 4"
+
+[node name="LevelNoticeLabel" parent="CanvasLayer/LevelNoticeContainer/MarginContainer/VBoxContainer" index="0"]
+text = "1. 冰球经过水面会使水结冰
+2. 通过冰面的普通球会结冰并加速
+3. 冰球高速撞击普通球会碎裂，并使普通球结冰
+4. 利用规则破坏所有球吧！"

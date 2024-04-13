@@ -53,9 +53,11 @@ func _process(delta):
 		power_bar.value = power / (get_parent().MAX_POWER)
 		#print(power)
 	else:
+		canDraw = false
 		if power > 0:
 			var direction = (position - mouse_pos).normalized()
 			shoot.emit(power * direction)
+			CueBallData.set_cue_ball_state(CueBallData.CueBallStates.MOVING)
 			Global.attempts+=1
 			# reset for next time
 			power = 0

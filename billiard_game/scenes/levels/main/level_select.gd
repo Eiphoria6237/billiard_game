@@ -2,10 +2,10 @@ extends Control
 
 
 const LEVEL_BTN = preload("res://scenes/levels/main/level_button.tscn")
+const INDEX_SCENE = preload("res://scenes/main/Index.tscn")
 @export_dir var dir_path
 
 @onready var grid = $MarginContainer/VBoxContainer/GridContainer
-
 
 func _ready() -> void:
 	get_levels(dir_path)
@@ -16,7 +16,8 @@ func get_levels(path):
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
-			create_level_btn('%s/%s' % [dir.get_current_dir(), file_name], file_name)
+			if file_name != "main.tscn":
+				create_level_btn('%s/%s' % [dir.get_current_dir(), file_name], file_name)
 			file_name = dir.get_next()
 		dir.list_dir_end()
 	else:
@@ -30,3 +31,7 @@ func create_level_btn(lvl_path, lvl_name):
 	Global.level_list.push_back(lvl_path)
 	grid.add_child(btn)
 
+func _on_back_button_pressed():
+	Music.get_node("Click").play()
+	INDEX_SCENE.instantiate()
+	get_tree().change_scene_to_packed(INDEX_SCENE)

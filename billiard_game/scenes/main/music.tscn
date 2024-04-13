@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3pv2ckv34got"]
+
+[ext_resource type="AudioStream" uid="uid://ca8qlv56yj23y" path="res://assets/audios/click1.ogg" id="1_jivgc"]
+[ext_resource type="AudioStream" uid="uid://khm3b3huluwb" path="res://assets/audios/bgm-loop.mp3" id="2_y8nkv"]
+
+[node name="Music" type="Node2D"]
+
+[node name="Click" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_jivgc")
+volume_db = 5.0
+
+[node name="BGM" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_y8nkv")
+volume_db = -5.0
+autoplay = true

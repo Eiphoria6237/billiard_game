@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://48pjycotvitf"]
+[gd_scene load_steps=6 format=3 uid="uid://48pjycotvitf"]
 
 [ext_resource type="Script" path="res://scenes/balls/neutral_ball/neutral_ball.gd" id="1_etoib"]
 [ext_resource type="Texture2D" uid="uid://0mw7lq07fwaq" path="res://assets/ball_state/neutral_ball.png" id="2_33w46"]
+[ext_resource type="AudioStream" uid="uid://dhdkg2lbkofg" path="res://assets/audios/ball_hit_ball.wav" id="3_t18to"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8u1qw"]
 bounce = 1.0
@@ -23,3 +24,6 @@ texture = ExtResource("2_33w46")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_153fh")
+
+[node name="PlayHitBall" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_t18to")

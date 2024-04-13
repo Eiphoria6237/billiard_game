@@ -14,13 +14,14 @@ func _ready():
 	CueBallData.cue_ball_state = CueBallData.CueBallStates.SHOOTABLE
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if DEBUG: max_speed = max(max_speed, linear_velocity.length_squared())
 
 	# Check if the cue ball has stopped
 	if super.is_stopped_or_still():
 		CueBallData.cue_ball_position = global_position
 		if shot:
+			$PlayCueHit.play()
 			shot = false
 			# signal to change ball state, see function check_state_change in neutral_ball
 			one_shot_finished.emit()

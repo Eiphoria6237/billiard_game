@@ -1,22 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://cflvljtsx78nq"]
+[gd_scene load_steps=3 format=3 uid="uid://brhkpujcjuwmx"]
 
-[ext_resource type="PackedScene" uid="uid://c26l1w8wv5kbo" path="res://scenes/main/level_template.tscn" id="1_uol15"]
-[ext_resource type="PackedScene" uid="uid://1p3p2ayf1422" path="res://scenes/terrain/water/water.tscn" id="2_0h7mi"]
-[ext_resource type="PackedScene" uid="uid://48pjycotvitf" path="res://scenes/balls/neutral_ball/neutral_ball.tscn" id="3_ndkxn"]
+[ext_resource type="PackedScene" uid="uid://c26l1w8wv5kbo" path="res://scenes/main/level_template.tscn" id="1_ga0pp"]
+[ext_resource type="PackedScene" uid="uid://coikgqnkwtbw3" path="res://scenes/terrain/tree/christmas_tree.tscn" id="3_ualml"]
 
-[node name="Main" instance=ExtResource("1_uol15")]
+[node name="Main" instance=ExtResource("1_ga0pp")]
+nuetral_ball_count = 3
 
-[node name="NeutralBall" parent="Balls" index="0" instance=ExtResource("3_ndkxn")]
-position = Vector2(899, 386)
+[node name="Christmas_tree" parent="." index="4" instance=ExtResource("3_ualml")]
+position = Vector2(387, 226)
+scale = Vector2(1, 1)
 
-[node name="NeutralBall2" parent="Balls" index="1" instance=ExtResource("3_ndkxn")]
-position = Vector2(728, 183)
+[node name="LevelName" parent="CanvasLayer/HUD/Stats" index="2"]
+text = "Level 3"
 
-[node name="NeutralBall3" parent="Balls" index="2" instance=ExtResource("3_ndkxn")]
-position = Vector2(1016, 108)
-
-[node name="NeutralBall4" parent="Balls" index="3" instance=ExtResource("3_ndkxn")]
-position = Vector2(645, 471)
-
-[node name="Water" parent="." index="4" instance=ExtResource("2_0h7mi")]
-position = Vector2(356, 515)
+[node name="LevelNoticeLabel" parent="CanvasLayer/LevelNoticeContainer/MarginContainer/VBoxContainer" index="0"]
+custom_minimum_size = Vector2(350, 0)
+text = "1. 球撞击圣诞树会结冰
+2. 大力撞击可以破坏冰球
+3. 利用规则破坏所有球过关吧！"
+autowrap_mode = 2

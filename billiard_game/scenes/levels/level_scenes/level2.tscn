@@ -1,17 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://ciuuweablav7l"]
+[gd_scene load_steps=2 format=3 uid="uid://qgrpc4xs1i38"]
 
-[ext_resource type="PackedScene" uid="uid://c26l1w8wv5kbo" path="res://scenes/main/level_template.tscn" id="1_ga0pp"]
-[ext_resource type="PackedScene" uid="uid://coikgqnkwtbw3" path="res://scenes/terrain/tree/christmas_tree.tscn" id="3_ualml"]
-[ext_resource type="PackedScene" uid="uid://48pjycotvitf" path="res://scenes/balls/neutral_ball/neutral_ball.tscn" id="5_q753v"]
-[ext_resource type="PackedScene" uid="uid://1p3p2ayf1422" path="res://scenes/terrain/water/water.tscn" id="6_281gt"]
+[ext_resource type="PackedScene" uid="uid://c26l1w8wv5kbo" path="res://scenes/main/level_template.tscn" id="1_t6dkd"]
 
-[node name="Main" instance=ExtResource("1_ga0pp")]
+[node name="Main" instance=ExtResource("1_t6dkd")]
+nuetral_ball_count = 4
 
-[node name="NeutralBall" parent="Balls" index="0" instance=ExtResource("5_q753v")]
-position = Vector2(851, 298)
+[node name="LevelName" parent="CanvasLayer/HUD/Stats" index="2"]
+text = "Level 2"
 
-[node name="Christmas_tree" parent="." index="4" instance=ExtResource("3_ualml")]
-position = Vector2(786, 148)
-
-[node name="Water" parent="." index="5" instance=ExtResource("6_281gt")]
-position = Vector2(435, 388)
+[node name="LevelNoticeLabel" parent="CanvasLayer/LevelNoticeContainer/MarginContainer/VBoxContainer" index="0"]
+custom_minimum_size = Vector2(340, 0)
+text = "1. 着火的球与其他球相撞也会使其着火
+2. 在下一次击打结束后仍停留在火球旁边的普通球也会着火
+3. 利用规则破坏所有球过关吧！"
+autowrap_mode = 3
